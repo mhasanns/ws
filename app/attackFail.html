@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSWSH Failing Attack Page</title>
+</head>
+<body>
+<script>
+	var conn = null;
+	function handshake(){
+		conn = new WebSocket("ws://localhost:8000/secret");
+		conn.onopen = function(){
+			alert("Handshake successful");
+		}
+	}
+
+	function cswsh(){
+		if(conn == null){
+			alert('Click "Handshake" first');
+			return;
+		}
+		conn.onmessage = function (e) {
+		  alert("Hijacked content: \n" + e.data);
+		}
+
+		conn.send("getSecretSafely");
+	}
+</script>
+<center>
+<strong>Note: Load this page via the file:/// protocol or via an HTTP server instance other than the one declared in the one<br>
+used inside the <i>setAllowedOrigin()</i> function in the server.php file.</strong>
+<p>This page is the same as the <a href="attack.html">Sample Attack Page</a>, except that this page executes the function<br>
+declared in the <a href="safe.php">safe page</a>, which is safe due to checks on the Origin header. Please follow the<br>
+note mentioned above for the attack to fail as expected.
+Although you will be able to establish a valid handshake by clicking <br>the "Handshake" button, you will not be able to
+show the secret in this case because the Origin header will either be set to <br>null (if the page is loaded over the file:// protocol)
+or to a value that is not accepted by the server, and so you will receive an error message.</p>
+<button onclick="handshake()">Handshake</button>
+<button onclick="cswsh()">Show Secret</button>
+</center>
+</body>
+</html>
