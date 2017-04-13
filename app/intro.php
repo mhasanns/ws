@@ -20,7 +20,7 @@
 		key, which is in turn Base64 decoded by the server, concatenated with "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", SHA1 hashed, and finally Base64 encoded. The value is then returned <br>as the value of the <strong>Sec-WebSocket-Accept</strong> header, marking the end of the successful handshake process.<br>
 		The following are two pages, where the first initiates an unsafe WebSocket handshake that allows for Cross Site WebSocket Hijacking<br>
 		attacks to take place, and the second does the same handshake in a safe way by checking the Origin header on the server-side.<br>
-		The unsafe example page contains a link to a sample attack page, and the safe example page contains a link to a sample failing attack scenario page.</p>
+		The unsafe example page contains a link to a sample attack page, and the safe example pages contain a links to pages that launch failing attacks.</p>
 		<br><br>
 		<a href="unsafe.php">Unsafe WebSocket Handshake</a><br><br>
 		<a href="safe.php">Safe WebSocket Handshake (via Origin checks)</a><br><br>
