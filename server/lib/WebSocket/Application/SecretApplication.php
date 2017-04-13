@@ -11,11 +11,14 @@ class SecretApplication extends Application
 {
     private $_clients = array();
     private $isAuth = false;
-
+    private $server = null;
+    private $origin = '';
 	public function onConnect($client)
     {
 		$id = $client->getClientId();
         $this->_clients[$id] = $client;
+        $this->server = $client->server;
+        $this->origin = $client->origin;
         $this->isAuth = $this->checkCookie($client);
     }
 
@@ -30,9 +33,19 @@ class SecretApplication extends Application
     	if($data === 'getSecret'){
 			$info = "Invalid session cookie, no secret to show.";
 			if($this->isAuth)
-				$info = "Hacking = happiness";
+				$info = "Hacking = Happiness";
+			$this->sendSecret($client, $info);
+			$this->server->log("Received: $data, responded with $info");
 		}
-		$this->sendSecret($client, $info);
+
+		if($data === 'getSecretSafely'){
+			$info = "Invalid session cookie or Origin header.";
+			if($this->isAuth && $this->server->checkOrigin($this->origin)){
+				$info = "Valid Origin header, Hacking = Happiness";
+			}
+			$this->sendSecret($client, $info);
+			$this->server->log("Received: $data, responded with $info");
+		}
     }
 	
 	public function sendSecret($client, $info){

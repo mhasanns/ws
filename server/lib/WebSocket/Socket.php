@@ -89,7 +89,6 @@ class Socket
 		stream_context_set_option($this->context, 'ssl', 'passphrase', $pem_passphrase);
 		stream_context_set_option($this->context, 'ssl', 'allow_self_signed', true);
 		stream_context_set_option($this->context, 'ssl', 'verify_peer', false);
-		stream_context_set_option($this->context, 'ssl', 'ciphers', 'LOW');	
 	}
 	
 	// method originally found in phpws project:

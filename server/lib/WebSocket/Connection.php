@@ -9,7 +9,7 @@ namespace WebSocket;
  */
 class Connection
 {
-    private $server;
+    public $server;
     private $socket;
     private $handshaked = false;
     private $application = null;	
@@ -20,7 +20,7 @@ class Connection
 	
 	public $waitingForData = false;
 	private $_dataBuffer = '';
-
+	public $origin;
 	public $sessCookie = 'Empty';
 
 
@@ -39,7 +39,7 @@ class Connection
 		$this->log('Connected');
     }
 
-    private function setHeaders($data){
+    public function setHeaders($data){
     	$lines = preg_split("/\r\n/", $data);
     	$headers = array();
         foreach($lines as $line)
@@ -209,7 +209,7 @@ class Connection
 	public function onData($data)
     {
     	$this->sessCookie = $this->parseCookie($data);
-		//$this->log("Session Cookie: " . $this->sessCookie);
+		$this->origin = $this->setHeaders($data)["Origin"];
         if($this->handshaked)
 		{
             return $this->handle($data);

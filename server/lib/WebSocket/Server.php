@@ -53,7 +53,7 @@ class Server extends Socket
 				{
 					if(($ressource = stream_socket_accept($this->master)) === false)
 					{
-						$this->log('Socket error: ');
+						$this->log('Socket error: ' . socket_strerror(socket_last_error($ressource)));
 						continue;
 					}
 					else
