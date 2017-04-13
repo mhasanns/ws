@@ -16,7 +16,7 @@
 	by embedding a CSRF token in the page's source (view the page source to see it), and then sending it with every WebSocekts send() function call and making<br>
 	sure it's valid and belongs to the logged in user. Follow the same steps mentioned in the other examples in order to see how it works. You can also click<br>
 	the "Filing Attack Page" link in order to take a look at a page that sends a request to obtain the "secret" information with an invalid CSRF token.</p>
-	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret"><br><br>
+	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret" disabled="disabled"><br><br>
 	<input type="hidden" name="csrfToken" value="<?php include('csrfToken.php');?>">
 	<input onclick="connect()" type="submit" value="Connect"/>
 	<input onclick="send()" type="submit" value="Show Secret">

@@ -20,7 +20,7 @@
 	access to data that belongs to other users, in a CSRF-like attack scenario.<br>
 	Click the "Safe Example" link to visit a sample page that does the same function but in a safe way, where a check on the Origin header is<br>
 	performed in order to check whether a client is eligible for accessing the "secret" information returned.</p>
-	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret"><br><br>
+	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret" disabled="disabled"><br><br>
 	<input onclick="connect()" type="submit" value="Connect"/>
 	<input onclick="send()" type="submit" value="Show Secret">
 	<input id="closeconn" type="submit" value="Disconnect"/>

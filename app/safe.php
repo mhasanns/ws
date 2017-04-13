@@ -14,7 +14,7 @@
 	<p>This page contains the same function explained in the <a href="unsafe.php">unsafe example page</a>, but here the function<br>
 	is performed in a secure way by checking if the Origin header is valid. Click the "Failing Attack Page" link in order to see how <br>
 	an attack page that attempts to do the same attack fails because of the Origin checks performed before transmitting the "secret" information.</p>
-	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret"><br><br>
+	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret" disabled="disabled"><br><br>
 	<input onclick="connect()" type="submit" value="Connect"/>
 	<input onclick="send()" type="submit" value="Show Secret">
 	<input id="closeconn" type="submit" value="Disconnect"/>
