@@ -23,7 +23,8 @@
 		The unsafe example page contains a link to a sample attack page, and the safe example page contains a link to a sample failing attack scenario page.</p>
 		<br><br>
 		<a href="unsafe.php">Unsafe WebSocket Handshake</a><br><br>
-		<a href="safe.php">Safe WebSocket Handshake</a>
+		<a href="safe.php">Safe WebSocket Handshake (via Origin checks)</a><br><br>
+		<a href="safe2.php">Safe WebSocket Handshake (via CSRF token checks)</a>
 		<br><br><br><br>
 		<a href="logout.php">Logout</a>
 	</center>

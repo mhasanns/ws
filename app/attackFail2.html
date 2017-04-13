@@ -26,12 +26,10 @@
 		  text.innerHTML = "Hijacked content: \n" + e.data;
 		}
 
-		conn.send("getSecretWithOrigin");
+		conn.send("getSecretWithToken:InvalidCSRFToken");
 	}
 </script>
 <center>
-<strong>Note: Load this page via the file:/// protocol or via an HTTP server instance other than the one declared in the one<br>
-used inside the <i>setAllowedOrigin()</i> function in the server.php file.</strong>
 <p>This page is the same as the <a href="attack.html">Sample Attack Page</a>, except that this page executes the function<br>
 declared in the <a href="safe.php">safe page</a>, which is safe due to checks on the Origin header. Please follow the<br>
 note mentioned above for the attack to fail as expected.

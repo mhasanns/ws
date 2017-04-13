@@ -9,17 +9,21 @@
 	function handshake(){
 		conn = new WebSocket("ws://localhost:8000/secret");
 		conn.onopen = function(){
-			alert("Handshake successful");
+			text.innerHTML = "Handshake successful";
+		}
+
+		conn.onclose = function(){
+			conn = null;
 		}
 	}
 
 	function cswsh(){
 		if(conn == null){
-			alert('Click "Handshake" first');
+			text.innerHTML = 'Click "Handshake" first';
 			return;
 		}
 		conn.onmessage = function (e) {
-		  alert("Hijacked content: \n" + e.data);
+		  text.innerHTML = "Hijacked content: \n" + e.data;
 		}
 
 		conn.send("getSecret");
@@ -36,6 +40,7 @@ This is where the CSRF-like behavior appears, but with the ability to read the r
 <a href="http://www.christian-schneider.net/CrossSiteWebSocketHijacking.html">Original Writeup</a><br><br>
 <button onclick="handshake()">Handshake</button>
 <button onclick="cswsh()">Show Secret</button>
+<p id="text"></p>
 </center>
 </body>
 </html>

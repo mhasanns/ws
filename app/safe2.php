@@ -11,22 +11,19 @@
 </head>
 <body>
 <center>
-	<p>As mentioned in the menu page, the whole process starts with a handshake between the client (the browser) and the server. After the successful<br>
-	handshake, a full-duplix connection is maintained between the peers until one of them disconnects. Throughout the connection, clients can send requests<br>
-	to the WebSocket server and recieve responses from it. You can try the below buttons in order to further see how things work.<br>
-	Start by clicking the "Connect" button. Then, try clicking the "Show Secret" button, which shows a simple message that is returned by the server upon<br>
-	recieving the string "getSecret" from a connected client. Finally, close the connection by clicking the "Disconnect" button.<br>
-	Click the "Sample Attack Page" link in order to navigate to a sample page that shows how an attacker can exploit this behavior in order to get<br>
-	access to data that belongs to other users, in a CSRF-like attack scenario.<br>
-	Click the "Safe Example" link to visit a sample page that does the same function but in a safe way, where a check on the Origin header is<br>
-	performed in order to check whether a client is eligible for accessing the "secret" information returned.</p>
+	<p>While WebSocekt connections can be secure via checking the Origin header as demonstrated <a href="safe.php">here</a>, other techniques can also<br>
+	be employed in order to assess the eligibility of the client to access the information in place. In this example, we verify the client's eligibility<br>
+	by embedding a CSRF token in the page's source (view the page source to see it), and then sending it with every WebSocekts send() function call and making<br>
+	sure it's valid and belongs to the logged in user. Follow the same steps mentioned in the other examples in order to see how it works. You can also click<br>
+	the "Filing Attack Page" link in order to take a look at a page that sends a request to obtain the "secret" information with an invalid CSRF token.</p>
 	Host: <input type="text" id="host" style="width: 170px;" value="ws://localhost:8000/secret"><br><br>
+	<input type="hidden" name="csrfToken" value="<?php include('csrfToken.php');?>">
 	<input onclick="connect()" type="submit" value="Connect"/>
 	<input onclick="send()" type="submit" value="Show Secret">
 	<input id="closeconn" type="submit" value="Disconnect"/>
 	<p id="text"></p>
 	<br><br><br><br>
-	<a href="attack.html">Sample Attack Page</a>
+	<a href="attackFail2.html">Failing Attack Page</a>
 	<br><br>
 	<a href="logout.php">Logout</a>
 </center>
@@ -65,7 +62,8 @@
 			text.innerHTML = 'Click the "Connect" button first';
 			return;
 		}
-		conn.send("getSecret");
+		var csrfToken = document.getElementsByName("csrfToken")[0].value;
+		conn.send("getSecretWithToken:"+csrfToken);
 	}
 </script>
 </body>

@@ -9,6 +9,8 @@
 				if($_POST['password'] == explode(':', $pair)[1]){
 					$sess = md5($pair);
 					setcookie("sess", $sess, 0, "/");
+					$csrfToken = bin2hex(random_bytes(32));
+					file_put_contents('../server/tokens.txt', $sess . ':' . $csrfToken . PHP_EOL, FILE_APPEND);
 					header("Location: intro.php");
 				}else{
 					header("Location: index.php?error=1");
