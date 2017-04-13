@@ -11,17 +11,20 @@ others may user HTTP authentication. Another drawback is that WebSockets don't f
 Sharing rules, allowing for cross origin attacks if the functions are not well protected on purpose by the developers.
 
 This small app demonstrates how Cross Site WebSockets Hijacking attacks occur by showing an unprotected version of a simple handshake
-and connection and a safe way of doing it.
+and connection, and a two safe ways of doing so.
 
 ### NOTE: This app only works on Windows machines currently. I have no idea why, and at this point I'm too afraid to ask.
 
+## Requirements:
+An HTTP server is required for this app to work (Apache, Nginx, etc.), as well as PHP.
+
 ## Installation:
-1- Download (or clone) this repo on your local machine and extract it into your web root<br>
+1- Download (or clone) this repo to your local machine and extract it into your web root<br>
 2- Start your normal HTTP server and navigate to http://HOST/path/to/ws-master/app/index.php, authenticate with `admin:admin` (super secure !)<br>
-3- Fire a command line, navigate to /path/to/ws-master/server, then issue the command `php server.php`<br>
+3- Fire a CLI, navigate to /path/to/ws-master/server, then issue the command `php server.php`<br>
 4- Follow the explanation in the pages
 
 ## Brother Abernathy:
-This is upon <a href='https://github.com/asdizzle'>@asdizzle</a>'s request, actually he forced me to do that
+This section was added upon <a href='https://github.com/asdizzle'>@asdizzle</a>'s request, actually he forced me to do that
 
 <img src='https://i.imgur.com/2lZ8PHu.jpg' width='300px' height='250px' alt="Brother Abernathy">
